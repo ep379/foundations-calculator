@@ -25,6 +25,9 @@ function operate(firstNumber, operator, secondNumber){
         return multiply(firstNumber, secondNumber);
     }
     else if (operator === "/") {
+        if (secondNumber == 0){
+            return "Can't Divide By Zero"
+        }
         return divide(firstNumber, secondNumber);
     }
 }
@@ -59,6 +62,17 @@ for (let i = 0; i < 10; i++){
     });
     numberContainer.appendChild(numberButton);
 }
+const period = document.createElement('button');
+period.textContent = ".";
+period.addEventListener('click', () => {
+    let separateToDecimalCheck = display.textContent.split(' ');
+    if (((separateToDecimalCheck.length == 1 || separateToDecimalCheck.length == 2) && !separateToDecimalCheck[0].includes("."))
+            || (separateToDecimalCheck.length == 3 && !separateToDecimalCheck[2].includes("."))){
+        display.textContent += period.textContent;
+    }
+});
+numberContainer.appendChild(period);
+
 const operations = ['+', '-', '/', 'x', '='];
 for (operator in operations){
     let operatorButton = document.createElement('button');
@@ -71,11 +85,13 @@ for (operator in operations){
         }
         else {
             let splitCurrentlyDisplayed = currentlyDisplayed.split(" ");
-            if (operatorButton.textContent == "=") {
-                display.textContent = operate(Number(splitCurrentlyDisplayed[0]),splitCurrentlyDisplayed[1],Number(splitCurrentlyDisplayed[2]))
-            }
-            else {
-                display.textContent = operate(Number(splitCurrentlyDisplayed[0]),splitCurrentlyDisplayed[1],Number(splitCurrentlyDisplayed[2])) + " " + operatorButton.textContent + " ";
+            if(display.textContent.slice(-1) != ' ' && !(display.textContent.includes("Can't Divide By Zero"))){
+                if (operatorButton.textContent == "=") {
+                    display.textContent = operate(Number(splitCurrentlyDisplayed[0]),splitCurrentlyDisplayed[1],Number(splitCurrentlyDisplayed[2]))
+                }
+                else {
+                    display.textContent = operate(Number(splitCurrentlyDisplayed[0]),splitCurrentlyDisplayed[1],Number(splitCurrentlyDisplayed[2])) + " " + operatorButton.textContent + " ";
+                }
             }
         }
     });
@@ -86,11 +102,19 @@ for (operator in operations){
 const backspace = document.createElement('button');
 backspace.textContent = 'backspace';
 backspace.setAttribute('id','backspace');
+backspace.addEventListener('click', () => {
+    if(display.textContent.slice(-1) != ' '){
+        display.textContent = display.textContent.slice(0, -1);
+    }
+});
 clearBackspaceContainer.appendChild(backspace);
 
 const clear = document.createElement('button');
 clear.textContent = 'C';
 clear.setAttribute('id','clear');
+clear.addEventListener('click', () => {
+    display.textContent = "";
+});
 clearBackspaceContainer.appendChild(clear);
 
 //Event Listener to display numbers when the numbers are clicked
@@ -103,3 +127,6 @@ clearBackspaceContainer.appendChild(clear);
 //separate the string by spaces, if the length is 1, add the operator " + " with the spaces, unless operator was =
 //once the operator is pressed, store the first value, now display that number, and the plus
 // if the plus is pressed again and first value is already set, operate and then replace the stored value with the new one
+
+//make you not able to hit another operator if there is currently a space at the end
+
