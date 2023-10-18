@@ -87,12 +87,12 @@ for (let operator in operations){
     operatorButton.setAttribute('id', operations[operator]);
     operatorButton.addEventListener('click', () => {
         let currentlyDisplayed = display.textContent
-        if(currentlyDisplayed.split(" ").length == 1){
+        if(currentlyDisplayed.split(" ").length == 1 && display.textContent != ""){
             display.textContent += " " + operatorButton.textContent + " ";
         }
         else {
             let splitCurrentlyDisplayed = currentlyDisplayed.split(" ");
-            if(display.textContent.slice(-1) != ' ' && !(display.textContent.includes("Can't Divide By Zero"))){
+            if(display.textContent.slice(-1) != ' ' && !(display.textContent.includes("Can't Divide By Zero")) && display.textContent != ""){
                 if (operatorButton.textContent == "=") {
                     display.textContent = operate(Number(splitCurrentlyDisplayed[0]),splitCurrentlyDisplayed[1],Number(splitCurrentlyDisplayed[2]))
                 }
