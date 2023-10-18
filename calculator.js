@@ -31,21 +31,26 @@ function operate(firstNumber, operator, secondNumber){
         return divide(firstNumber, secondNumber);
     }
 }
+const body = document.querySelector("body");
+const OutermostContainerIncludingDisplay = document.createElement('div');
+OutermostContainerIncludingDisplay.setAttribute('class', 'OuterMost');
+body.appendChild(OutermostContainerIncludingDisplay)
 
-var firstNumber;
-var operator;
-var secondNumber;
 
-const body = document.querySelector("body")
-const container = document.createElement("div")
+const container = document.createElement("div");
+container.setAttribute("class", "container");
 const display = document.createElement('div');
+display.setAttribute("class", "display");
 // display.textContent = 9746395;
-body.appendChild(display);
-body.appendChild(container)
+OutermostContainerIncludingDisplay.appendChild(display);
+OutermostContainerIncludingDisplay.appendChild(container);
 const numbersAndClearBackSpaceContainer = document.createElement('div');
 const clearBackspaceContainer = document.createElement('div');
+clearBackspaceContainer.setAttribute("class", "clearBackspace");
 const numberContainer = document.createElement('div');
+numberContainer.setAttribute("class", "numbers")
 const operatorContainer = document.createElement('div');
+operatorContainer.setAttribute("class", "operators")
 
 container.appendChild(numbersAndClearBackSpaceContainer);
 numbersAndClearBackSpaceContainer.appendChild(clearBackspaceContainer);
@@ -53,7 +58,7 @@ numbersAndClearBackSpaceContainer.appendChild(numberContainer);
 container.appendChild(operatorContainer);
 
 
-for (let i = 0; i < 10; i++){
+for (let i = 9; i >= 0; i--){
     let numberButton = document.createElement("button");
     numberButton.textContent = i;
     numberButton.setAttribute('class', 'number');
@@ -64,6 +69,8 @@ for (let i = 0; i < 10; i++){
 }
 const period = document.createElement('button');
 period.textContent = ".";
+period.setAttribute("class", "numbers");
+period.setAttribute("id", "period");
 period.addEventListener('click', () => {
     let separateToDecimalCheck = display.textContent.split(' ');
     if (((separateToDecimalCheck.length == 1 || separateToDecimalCheck.length == 2) && !separateToDecimalCheck[0].includes("."))
@@ -74,7 +81,7 @@ period.addEventListener('click', () => {
 numberContainer.appendChild(period);
 
 const operations = ['+', '-', '/', 'x', '='];
-for (operator in operations){
+for (let operator in operations){
     let operatorButton = document.createElement('button');
     operatorButton.textContent = operations[operator];
     operatorButton.setAttribute('id', operations[operator]);
@@ -129,4 +136,4 @@ clearBackspaceContainer.appendChild(clear);
 // if the plus is pressed again and first value is already set, operate and then replace the stored value with the new one
 
 //make you not able to hit another operator if there is currently a space at the end
-
+//are lines 85-87 needed

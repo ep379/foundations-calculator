@@ -1,0 +1,55 @@
+html {
+    background-color: aliceblue;
+    min-height: 100vh;
+}
+
+body {
+
+    max-width: 400px;
+    margin: 0 auto;
+    margin-top: 25%;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.operators {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 33.3%;
+}
+
+.numbers {
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: 33.3%;
+}
+
+.number {
+    margin-left: auto;
+    width: 33.3%;
+}
+
+.OutermostContainerIncludingDisplay {
+    display: flex;
+    flex-direction: column;
+}
+
+.display {
+    background-color: white;
+    height: 25px;
+}
+
+#backspace {
+    flex-basis: 33.3%;
+}
+
+#clear {
+    flex-basis: 33.3%;
+}
+
+.clearBackspace {
+    display: flex;
+}
